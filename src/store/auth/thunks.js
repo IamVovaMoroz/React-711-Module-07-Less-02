@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { login } from "../../api/auth";
+import { getProfile, login } from "../../api/auth";
 
 export const loginThunk = createAsyncThunk(
     "/auth/login",
@@ -18,3 +18,19 @@ export const loginThunk = createAsyncThunk(
 )
 
 // Результат выполнения функции login возвращается из createAsyncThunk, чтобы быть доступным в обработчиках состояния.
+
+export const profileThunk = createAsyncThunk(
+    "/auth/profile",
+     async(_, {rejectWithValue})=> {
+    try{ 
+        const data =  await getProfile()
+       
+        return data
+    }catch(error){
+       
+      return  rejectWithValue(error.response.data.message)
+    }
+}
+
+
+)

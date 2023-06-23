@@ -8,15 +8,24 @@ const handleFulfilled = (state, { payload }) => {
   
 };
 
+const handleFulfilledProfile = (state, { payload }) => {
+	state.profile = { ...payload }
+	state.isLoading = false
+}
+
+
+
 const handlePending = (state) => {
     state.isLoading = true;
     state.error = "";
   };
 
-const handleRejected = (state, { error }) => {
-  state.error = error.message;
-  state.isLoading = false;
-};
+  const handleRejected = (state, { error, payload }) => {
+	state.isLoading = false
+	console.log('error :>> ', error)
+	console.log('payload :>> ', payload)
+	state.error = error.message
+}
 
 
 
@@ -24,6 +33,7 @@ const initialState = {
   access_token: "",
   isLoading: false,
   error: "",
+  profile: null,
 };
 
 const authSlice = createSlice({

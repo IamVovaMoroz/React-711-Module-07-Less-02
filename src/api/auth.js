@@ -11,10 +11,10 @@ const setToken = (token) => {
 
 }
 
-export const login = async (body) => {
-    const { data } = await instance.post('/auth/login', body)
-return data
-}
+// export const login = async (body) => {
+//     const { data } = await instance.post('/auth/login', body)
+// return data
+// }
 
 
 
@@ -25,25 +25,14 @@ export const signUp = async (body) => {
 
 
 
-// export const login = async (body) => {
-// 	const { data } = await instance.post('/auth/login', body)
-// 	if ('access_token' in data) setToken(`Bearer ${data.access_token}`)
-// 	return data
-// }
+export const login = async (body) => {
+	const { data } = await instance.post('/auth/login', body)
+    // при наличии access_token' in data setToken стандартная запись (`Bearer ${data.access_token}`)
+	if ('access_token' in data) setToken(`Bearer ${data.access_token}`)
+	return data
+}
 
-// export const login = async (body) => {
-//     try {
-//       const { data } = await instance.post('/auth/login', body)
-//       if ('access_token' in data) {
-//         setToken(`Bearer ${data.access_token}`)
-//       }
-//       console.log("data login = asyn",data) // Выводим данные в консоль
-//       return data
-//     } catch (error) {
-//       console.error("error login = asyn",error)
-//       throw error
-//     }
-//   }
+
 
 export const getProfile = async () => {
 	const { data } = await instance('/auth/profile')
